@@ -17,6 +17,7 @@
         </li>
       </ul>
     </div>
+    <%= link_to "#{current_user.first_name} #{current_user.last_name}", edit_user_registration_path(current_user) %>
     <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-danger" %> 
   </div>
   </nav>

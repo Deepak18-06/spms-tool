@@ -1,7 +1,6 @@
 <%= bootstrap_form_for(@customer) do |form| %>
   <% if @customer.errors.any? %>
     <div class="alert alert-danger">
-      <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
       <ul>
         <% @customer.errors.full_messages.each do |error_message| %>
           <li><%= error_message %></li>
@@ -40,10 +39,13 @@
         <%= render 'quotation_fields', f: quotation_fields %>
       <% end %>
     </div>
+    <div class="col-md-12">
+      <%= link_to_add_association 'Add Quotation', form, :quotations, class: 'btn btn-secondary btn-sm mt-2' %>
+    </div>
   </div>
 
+
   <div class="text-center mt-3">
-    <%= link_to_add_association 'Add Quotation', form, :quotations, class: 'btn btn-secondary' %>
     <%= form.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
