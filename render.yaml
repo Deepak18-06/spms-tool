@@ -1,9 +1,19 @@
+databases:
+  - name: postgres
+    ipAllowList: []
+    databaseName: spms-prod
+    user: deepak
+
 services:
   - type: web
-    name: my_app_render
+    name: spms-tool
     env: ruby
     buildCommand: "./render-build.sh"
-    startCommand: "bundle exec rails s -e production"
+    startCommand: "bundle exec rails s"
     envVars:
-      - key: RAILS_ENV
-        value: "production"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: postgres
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
