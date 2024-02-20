@@ -23,4 +23,5 @@ test:
 
 production:
   <<: *default
-  database: spms-prod
+  url: <%= ENV['DATABASE_URL'] %>
+  
