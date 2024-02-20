@@ -1,0 +1,37 @@
+<%= form_with(model: quotation) do |form| %>
+  <% if quotation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(quotation.errors.count, "error") %> prohibited this quotation from being saved:</h2>
+
+      <ul>
+        <% quotation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :attachment, "Attachment", style: "display: block" %>
+    <%= form.file_field :attachment, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div>
+    <%= form.label :comment, style: "display: block" %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <div>
+    <%= form.label :customer_id, "Customer", style: "display: block" %>
+    <%= form.collection_select :customer_id, Customer.all, :id, :first_name, { prompt: "Select a customer" }, { class: "form-control" } %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
