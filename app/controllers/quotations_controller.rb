@@ -1,9 +1,14 @@
 class QuotationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_quotation, only: %i[ show edit update destroy ]
 
   # GET /quotations or /quotations.json
   def index
     @quotations = Quotation.all
+    @quotations = @quotations.where(date: params[:date].to_date.beginning_of_day..params[:date].to_date.end_of_day) if params[:date].present?
+    @quotations = @quotations.where(customer_id: params[:customer_id]) if params[:customer_id].present?
+    @quotations = @quotations.joins(:customer).where("customers.first_name LIKE :name OR customers.last_name LIKE :name", name: "%#{params[:customer_name]}%") if params[:customer_name].present?
+    @quotations = @quotations.where("attachment_filename LIKE ?", "%#{params[:attachment_filename]}%") if params[:attachment_filename].present?
   end
 
   # GET /quotations/1 or /quotations/1.json

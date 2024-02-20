@@ -1,0 +1,7 @@
+<div class="nested-fields border border-dashed border-primary rounded p-3 mb-3">
+  <%= f.date_field :date, class: "form-control" %>
+  <%= f.file_field :attachment, class: "form-control", accept: 'application/pdf, 
+    application/zip,application/vnd.openxmlformats-officedocument.wordprocessingml.document' %>
+  <%= f.text_field :comment, class: "form-control"%>
+  <%= link_to_remove_association "Remove Quotation", f, class: "btn btn-danger mt-2" %>
+</div>

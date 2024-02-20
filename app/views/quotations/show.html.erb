@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <p style="color: green"><%= notice %></p>
 
-<%= render @quotation %>
+  <%= render @quotation %>
 
-<div>
-  <%= link_to "Edit this quotation", edit_quotation_path(@quotation) %> |
-  <%= link_to "Back to quotations", quotations_path %>
-
-  <%= button_to "Destroy this quotation", @quotation, method: :delete %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= link_to "Edit this Quotation", edit_quotation_path(@quotation), class: "btn btn-primary btn-block" %>
+    </div>
+    <div class="col-md-2">
+      <%= link_to "Back to Quotations", quotations_path, class: "btn btn-secondary btn-block" %>
+    </div>
+    <div class="col-md-2">
+      <%= button_to "Delete this Quotation", @quotation, method: :delete , class: "btn btn-danger btn-block" %>
+    </div>
+  </div>
 </div>

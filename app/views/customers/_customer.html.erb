@@ -1,22 +1,43 @@
-<div id="<%= dom_id customer %>">
-  <p>
-    <strong>First name:</strong>
-    <%= customer.first_name %>
-  </p>
+<div id="<%= dom_id customer %>" class="card mb-3">
+  <div class="card-body">
+    <h3 class="card-title">Customer Information</h3>
 
-  <p>
-    <strong>Last name:</strong>
-    <%= customer.last_name %>
-  </p>
+    <p class="card-text">
+      <strong>First Name:</strong>
+      <%= customer.first_name %>
+    </p>
 
-  <p>
-    <strong>Phone:</strong>
-    <%= customer.phone %>
-  </p>
+    <p class="card-text">
+      <strong>Last Name:</strong>
+      <%= customer.last_name %>
+    </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= customer.email %>
-  </p>
+    <p class="card-text">
+      <strong>Phone:</strong>
+      <%= customer.phone %>
+    </p>
 
+    <p class="card-text">
+      <strong>Email:</strong>
+      <%= customer.email %>
+    </p>
+
+    <% if customer.quotations.any? %>
+      <h4 class="mt-4">Quotations</h4>
+      <ul>
+        <% customer.quotations.each do |quotation| %>
+          <li>
+            <%= link_to quotation.attachment.filename, quotation_path(quotation), class: "btn btn-link" %> |
+            <strong>Date:</strong> <%= quotation.date %> |
+            <%= link_to url_for(quotation.attachment), class: "btn btn-link" do %>
+              <% if quotation.attachment.attached? %>
+                <i class="fa bi-download"></i> <!-- Bootstrap Icons download icon -->
+              <% end %>
+            <% end %> |           
+            <strong>Comment:</strong> <%= quotation.comment %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 </div>

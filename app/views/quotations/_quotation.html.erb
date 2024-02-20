@@ -1,22 +1,30 @@
-<div id="<%= dom_id quotation %>">
-  <p>
-    <strong>Attachment:</strong>
-    <%= link_to quotation.attachment.filename, url_for(quotation.attachment) if quotation.attachment.attached? %>
-  </p>
+<div id="<%= dom_id quotation %>" class="card mb-3">
+  <div class="card-body">
+    <h3 class="card-title">Quotation Information</h3>
 
-  <p>
-    <strong>Date:</strong>
-    <%= quotation.date %>
-  </p>
+    <p class="card-text">
+      <strong>File Name:</strong>
+      <%= quotation.attachment&.filename %>
+    </p>
 
-  <p>
-    <strong>Comment:</strong>
-    <%= quotation.comment %>
-  </p>
+    <p class="card-text">
+      <strong>File Link:</strong>
+      <%= link_to quotation.attachment.filename, url_for(quotation.attachment) %>
+    </p>
 
-  <p>
-    <strong>Customer:</strong>
-    <%= quotation.customer_id %>
-  </p>
+    <p class="card-text">
+      <strong>Date:</strong>
+      <%= quotation.date %>
+    </p>
 
+    <p class="card-text">
+      <strong>Comment:</strong>
+      <%= quotation.comment %>
+    </p>
+
+    <p class="card-text">
+      <strong>Customer:</strong>
+      <%= quotation.customer.first_name %>
+    </p>
+  </div>
 </div>

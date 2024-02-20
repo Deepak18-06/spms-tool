@@ -71,3 +71,9 @@ gem "cssbundling-rails", "~> 1.4"
 gem "devise", "~> 4.9"
 
 gem "bootstrap_form", "~> 5.4"
+
+gem "jquery-rails", "~> 4.6"
+
+gem "cocoon", "~> 1.2"
+
+gem "activestorage-validator", "~> 0.4.0"

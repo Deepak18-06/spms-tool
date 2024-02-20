@@ -5,6 +5,9 @@ class CustomersController < ApplicationController
   # GET /customers or /customers.json
   def index
     @customers = Customer.all
+    @customers = @customers.where(created_at: params[:date].to_date.beginning_of_day..params[:date].to_date.end_of_day) if params[:date].present?
+    @customers = @customers.where(first_name: params[:name]) if params[:name].present?
+    @customers = @customers.where(id: params[:id]) if params[:id].present?
   end
 
   # GET /customers/1 or /customers/1.json
@@ -14,10 +17,12 @@ class CustomersController < ApplicationController
   # GET /customers/new
   def new
     @customer = Customer.new
+    @customer.quotations.build
   end
 
   # GET /customers/1/edit
   def edit
+    @customer.quotations.build if @customer.quotations.empty?
   end
 
   # POST /customers or /customers.json
@@ -66,6 +71,6 @@ class CustomersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :phone, :email)
+      params.require(:customer).permit(:first_name, :last_name, :phone, :email, quotations_attributes: [:id, :date, :attachment,:comment, :_destroy])
     end
 end
